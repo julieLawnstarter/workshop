@@ -1,5 +1,4 @@
-Writing an automation script using Standalone Mode
-==================================================
+# Writing an automation script using Standalone Mode
 
 After we have setup everything to automate Chrome on our machine, let's write our first automated script. The objective is as follows: write a simple Node.js script that does the following things:
 
@@ -30,26 +29,26 @@ npm install --save-dev webdriverio
 In your `test.js` file start writing the basic setup. I recommend to leverage the `async/await` functionality of Node.js that allows you to handle async operations in Node. Since every command is an asynchronous HTTP request to the browser driver, we have to make sure that we handle these async operations properly. You can use the following basic setup:
 
 ```js
-const { remote } = require('webdriverio')
+const { remote } = require("webdriverio");
 
 let browser;
 
 (async () => {
   browser = await remote({
     capabilities: {
-      browserName: 'chrome'
-    }
-  })
+      browserName: "chrome",
+    },
+  });
 
   // add your automation code here
   // ...
 
-  await browser.deleteSession()
+  await browser.deleteSession();
 })().catch(async (e) => {
-  console.error(e)
+  console.error(e);
 
   // close browser if something in our code went wrong
-  await browser.deleteSession()
+  await browser.deleteSession();
 });
 ```
 
@@ -61,7 +60,7 @@ $ node test.js
 
 This script now should open and close the browser again. You can now work on the assignment to create an automation script that does the steps outlined at the top of this chapter. You find all commands that are available in WebdriverIO in the [API docs](https://webdriver.io/docs/api.html).
 
-__Note:__ All code examples in the API docs assume your are running the WDIO testrunner using synchronous commands. This exercise is running WebdriverIO as standalone version. Synchronous commands are not supported here. Ensure that call every command with the `await` operator so that [Promises](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) are being resolved properly. You can read more about different modes and setup types of WebdriverIO [in the docs](https://webdriver.io/docs/setuptypes.html).
+**Note:** All code examples in the API docs assume your are running the WDIO testrunner using synchronous commands. This exercise is running WebdriverIO as standalone version. Synchronous commands are not supported here. Ensure that call every command with the `await` operator so that [Promises](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) are being resolved properly. You can read more about different modes and setup types of WebdriverIO [in the docs](https://webdriver.io/docs/setuptypes.html).
 
 ## Extra #1
 
@@ -81,40 +80,45 @@ And setting the option `automationProtocol` to `'devtools'`:
 
 ```js
 const browser = await remote({
-  automationProtocol: 'devtools',
+  automationProtocol: "devtools",
   capabilities: {
-    browserName: 'chrome'
-  }
-})
+    browserName: "chrome",
+  },
+});
 ```
 
 You can then interact with the browser using the [WebdriverIO API](https://webdriver.io/docs/api.html) as well as the [Puppeteer](https://pptr.dev/) framework.
 
-__Task:__ run WebdriverIO using the `devtools` automation protocol and pre-populate the local storage with items so that if you open the page it should have already have 3 ToDos stored. The local storage key for these items is `todos-vuejs` and should contain a list like:
+**Task:** run WebdriverIO using the `devtools` automation protocol and pre-populate the local storage with items so that if you open the page it should have already have 3 ToDos stored. The local storage key for these items is `todos-vuejs` and should contain a list like:
 
 ```json
-[{
-  "id": 1,
-  "title": "Foo",
-  "completed": false
-}, {
-  "id": 2,
-  "title": "Bar",
-  "completed": false
-}, {
-  "id": 3,
-  "title": "Loo",
-  "completed": false
-}]
+[
+  {
+    "id": 1,
+    "title": "Foo",
+    "completed": false
+  },
+  {
+    "id": 2,
+    "title": "Bar",
+    "completed": false
+  },
+  {
+    "id": 3,
+    "title": "Loo",
+    "completed": false
+  }
+]
 ```
 
 ## Extra #3
 
 In case your application is using a REST API you can also leverage WebdriverIO's [mock capabilities](https://webdriver.io/docs/api/browser/mock). This avoids switching between Protractor and WebDriver code and just makes you use the native WebdriverIO interface.
 
-__Task:__ modify your __Extra 2__ solution to use a TodoMVC app with a REST API backend, e.g. [https://www.todobackend.com/client/index.html?https://todo-backend-node-koa.herokuapp.com/todos](https://www.todobackend.com/client/index.html?https://todo-backend-node-koa.herokuapp.com/todos), and simplify your script to make use of the [mock](https://webdriver.io/docs/api/browser/mock) command.
+**Task:** modify your **Extra 2** solution to use a TodoMVC app with a REST API backend, e.g. [https://www.todobackend.com/client/index.html?https://todo-backend-node-koa.herokuapp.com/todos](https://www.todobackend.com/client/index.html?https://todo-backend-node-koa.herokuapp.com/todos), and simplify your script to make use of the [mock](https://webdriver.io/docs/api/browser/mock) command.
 
 Note:
+
 - the app url is now `https://www.todobackend.com/client/index.html?https://todo-backend-node-koa.herokuapp.com/todos`
 - the todobackend app uses a slightly outdated TodoMVC app, adjust your element selectors from `$$('.todo')` -> `$$('#todo-list li')` and `$('.todo-count')` to `$('#todo-count')`
 
