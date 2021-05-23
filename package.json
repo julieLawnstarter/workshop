@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/julieLawnstarter/workshop#readme",
   "devDependencies": {
+    "@wdio/allure-reporter": "^7.6.0",
     "@wdio/cli": "^7.5.7",
     "@wdio/local-runner": "^7.5.7",
     "@wdio/mocha-framework": "^7.5.3",

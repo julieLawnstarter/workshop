@@ -97,7 +97,7 @@ exports.config = {
     // with `/`, the base url gets prepended, not including the path portion of your baseUrl.
     // If your `url` parameter starts without a scheme or `/` (like `some/path`), the base url
     // gets prepended directly.
-    baseUrl: 'https://todomvc.com/examples/vue/',
+    baseUrl: 'https://todomvc.com/examples/vue',
     //
     // Default timeout for all waitFor* commands.
     waitforTimeout: 10000,
@@ -135,7 +135,7 @@ exports.config = {
     // Test reporter for stdout.
     // The only one supported by default is 'dot'
     // see also: https://webdriver.io/docs/dot-reporter
-    reporters: ['spec'],
+    reporters: ['spec',['allure', {outputDir: 'allure-results'}]],
 
 
     
@@ -223,8 +223,11 @@ exports.config = {
     /**
      * Function to be executed after a test (in Mocha/Jasmine).
      */
-    // afterTest: function(test, context, { error, result, duration, passed, retries }) {
-    // },
+    afterTest: function(test, context, { error, result, duration, passed, retries }) {
+        if (!passed) {
+            browser.takeScreenshot();
+        }
+    },
 
 
     /**
