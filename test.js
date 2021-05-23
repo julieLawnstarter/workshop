@@ -28,7 +28,7 @@ let browser;
   const counter = await browser.$(".todo-count strong");
   console.log(await counter.getText());
 
-  await browser.pause(2000);
+  await browser.pause(1000);
 
   // close browser if something in our code went wrong
   await browser.deleteSession();

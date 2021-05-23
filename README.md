@@ -1,5 +1,4 @@
-WebdriverIO Hands On
-====================
+# WebdriverIO Hands On
 
 This little course will help you to get up and running with WebdriverIO v7. It will walk you through different steps that will explain how to setup and use the project successfully.
 
@@ -30,10 +29,9 @@ If you don't have this installed go to [chapter 1](./chapter_01.md) where we wal
 1. [TypeScript](./chapter_12.md)
 1. [Go Pro](./chapter_13.md)
 
-## Disclaimer
+## Running tests
 
-All code and command examples assume that you are using a MacBook. Usually they should also work on Linux or a PowerShell on Windows. For anyone who has problems running certain things with Windows, please create an issue or provide a PR (see below).
+to run in node: node test.js
+to run in webdriver: npx wdio run test.js
 
-## Contributing
-
-Any kind suggestion to this course is welcome. If you have an idea, suggestion or improvements please create an issue or even better create a pull request.
+to start chromedriver: chromedriver --port=4444 --verbose
